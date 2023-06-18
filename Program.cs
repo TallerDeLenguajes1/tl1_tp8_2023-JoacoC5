@@ -33,7 +33,13 @@ internal class Program
     {
         for (int i = 0; i < cant; i++)
         {
-            var TareaP = new Tarea(i + 1, "Tarea: " + i, i);
+            var TareaP = new Tarea();
+            var random = new Random();
+            TareaP.TareaID = i + 1;
+            Console.WriteLine("\nID Tarea: " + TareaP.TareaID);
+            Console.WriteLine("Ingrese la descripcion de la tarea: ");
+            TareaP.Descripcion = Console.ReadLine();
+            TareaP.Duracion = random.Next(1, 101); //randomiza entre 1 y 100 la duracion de las tareas
             ListaDeTarea.Add(TareaP);
         }
     }
