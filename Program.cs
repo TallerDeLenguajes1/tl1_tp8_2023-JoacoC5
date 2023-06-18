@@ -1,4 +1,6 @@
-﻿using EspacioTarea;
+﻿using System.IO;
+
+using EspacioTarea;
 
 internal class Program
 {
@@ -21,6 +23,7 @@ internal class Program
             Console.WriteLine("\n\n-----TAREAS REALIZADAS-----");
             MostrarTareas(ListaDeTareasRealizadas);
             BuscarTareaPorDescripcion(ListaDeTareasPendientes);
+            ArchivosHorasTrabajadas(ListaDeTareasRealizadas);
         }
 
 
@@ -79,6 +82,25 @@ internal class Program
                 Console.WriteLine(TareaP.MostrarTarea());
             }
         }
+    }
+
+    private static void ArchivosHorasTrabajadas(List<Tarea> Realizadas)
+    {
+        string rutaArchivo = @"C:\Repos\TP08\tl1_tp8_2023-JoacoC5\HorasTrabajadas.txt";
+        int sumatoriaHoras = 0;
+
+        if (File.Exists(rutaArchivo))
+        {
+            File.Delete(rutaArchivo);
+        }
+
+        foreach (var TareaR in Realizadas)
+        {
+            sumatoriaHoras += TareaR.Duracion;
+        }
+        StreamWriter sw = new StreamWriter(rutaArchivo, true);
+        sw.WriteLine("Total de horas trabajadas: " + sumatoriaHoras);
+        sw.Close();
     }
 }
 
